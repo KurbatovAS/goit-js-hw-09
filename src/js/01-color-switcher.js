@@ -20,7 +20,7 @@ const colorChanger = {
         stopButtonEL.disabled = false;
 
         this.intervalId = setInterval(() => {            
-            bodyEl.style.backgroundColor = `${getRandomHexColor()}`;
+            bodyEl.style.backgroundColor = getRandomHexColor();
         }, 1000);
     },
 
