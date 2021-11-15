@@ -18,8 +18,8 @@ function onFormSubmit(event) {
     console.log(`delay: ${delay}, step: ${step}, amount: ${amount}`);
 
     createPromise(i, delay)
-      .then(result => Notiflix.Notify.success(result, { width: '300px' }))
-      .catch(error => Notiflix.Notify.failure(error, { width: '300px' }));
+      .then(({position, delay}) => Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`, { width: '300px' }))
+      .catch(({position, delay}) => Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`, { width: '300px' }));
     
     delay += step;    
   }  
@@ -31,9 +31,9 @@ function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
       setTimeout(() => {
       if (shouldResolve) {
-        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        resolve({position, delay});
       } else {
-        reject(`❌ Rejected promise ${position} in ${delay}ms`);
+        reject({position, delay});
       }
     }, delay);
   });
